@@ -98,7 +98,7 @@ def build(root=ROOT, url_override=None):
         entry = ET.SubElement(sitemap, 'url')
         ET.SubElement(entry, 'loc').text=url
         ET.SubElement(entry, 'lastmod').text=p['date']
-    home = f'''<section class="intro"><p class="eyebrow">A notebook in public</p><h1>Questions worth<br><em>sitting with.</em></h1><p>{escape(config['description'])}</p><div class="intro-signature">By {escape(config['author'])}</div></section><section class="essays" aria-labelledby="essays-title"><div class="section-heading"><h2 id="essays-title">Essays</h2><span>{len(posts):02d}</span></div><ol class="essay-list">{''.join(items)}</ol></section>'''
+    home = f'''<section class="intro"><h1>Galen's Corner</h1><p>{escape(config['description'])}</p></section><section class="essays" aria-labelledby="essays-title"><div class="section-heading"><h2 id="essays-title">Essays</h2><span>{len(posts):02d}</span></div><ol class="essay-list">{''.join(items)}</ol></section>'''
     write(out/'index.html',page(config['title'],config['description'],home))
     write(out/'404.html',page('Page not found','This page does not exist.',f'<h1>Page not found.</h1><p><a href="{base}/">Return to the essays →</a></p>','404.html'))
     write(out/'index.json',json.dumps({'title':config['title'],'posts':index},ensure_ascii=False,indent=2)+'\n')
