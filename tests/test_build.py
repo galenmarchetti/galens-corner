@@ -26,7 +26,9 @@ class BlogBuildTests(unittest.TestCase):
         for p, entry, item in zip(posts, index, rss):
             self.assertEqual((self.root/'docs/posts'/p['filename']).read_bytes(), (self.root/'posts'/p['filename']).read_bytes())
             self.assertEqual(entry['url'], item.findtext('link'))
-            self.assertIn('/galens-corner/essays/', entry['url'])
+            base = json.loads((self.root/'site.json').read_text())['url'].rstrip('/')
+            self.assertEqual(entry['url'], base + '/essays/' + p['slug'] + '/')
+            self.assertIn(entry['url'], (self.root/'docs/llms-full.txt').read_text())
             html = (self.root/'docs/essays'/p['slug']/'index.html').read_text()
             self.assertIn(entry['markdown_url'], html)
             self.assertIn(p['html'], html)
@@ -39,6 +41,21 @@ class BlogBuildTests(unittest.TestCase):
             if path.is_file():
                 self.assertNotIn('Sentience',path.read_text())
         self.assertFalse((self.root/'docs/essays/sentience/index.html').exists())
+    def test_custom_domain_survives_rebuild_and_is_omitted_in_preview(self):
+        config = json.loads((self.root/'site.json').read_text())
+        config['url'] = 'https://example.com'
+        config['custom_domain'] = 'example.com'
+        (self.root/'site.json').write_text(json.dumps(config))
+        build(self.root)
+        build(self.root)
+        self.assertEqual((self.root/'docs/CNAME').read_text(), 'example.com\n')
+        html = (self.root/'docs/essays/sentience/index.html').read_text()
+        self.assertIn('<link rel="canonical" href="https://example.com/essays/sentience/">', html)
+        build(self.root, url_override='http://localhost:8000/preview')
+        self.assertFalse((self.root/'docs/CNAME').exists())
+        html = (self.root/'docs/essays/sentience/index.html').read_text()
+        self.assertIn('http://localhost:8000/preview/style.css', html)
+
     def test_slug_cannot_escape_output_directory(self):
         p=next((self.root/'posts').glob('*.md'))
         p.write_text(p.read_text().replace('slug: sentience','slug: ../../elsewhere'))

@@ -9,7 +9,7 @@ On LLM torture chambers, indubitable truth, limitations of science
 
 2026-10-03 · Galen Marchetti
 
-Source: https://galenmarchetti.github.io/galens-corner/essays/sentience/
+Source: https://galenmarchetti.com/essays/sentience/
 
 A couple of weeks ago some nutjob set up an [AI torture chamber](https://x.com/AISafetyMemes/status/2105504796061167717?s=20), amplifying the internal “pain” state of an LLM to watch it desperately plead for relief. A lot of smart™ people have confidently pointed out that LLMs are just matrix computations. All they do is “predict the next token”. They’re not really experiencing pain; they’re just reacting mechanistically to the activation of a particular set of artificial neurons that correlate to pain and the kinds of things we do when we experience pain. These assured dismissals of the problem of AI torture come from an over-confidence in a science-based education and belief system.
 

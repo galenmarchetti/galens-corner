@@ -108,6 +108,8 @@ def build(root=ROOT, url_override=None):
     write(out/'sitemap.xml',ET.tostring(sitemap,encoding='unicode',xml_declaration=True))
     write(out/'robots.txt',f'User-agent: *\nAllow: /\n\nSitemap: {base}/sitemap.xml\n')
     write(out/'.nojekyll','')
+    if config.get('custom_domain') and not url_override:
+        write(out/'CNAME', config['custom_domain']+'\n')
     shutil.copyfile(root/'theme/style.css',out/'style.css')
     print(f'Built {len(posts)} post(s) into {out}')
     return posts

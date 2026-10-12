@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://galenmarchetti.github.io/galens-corner/sitemap.xml
+Sitemap: https://galenmarchetti.com/sitemap.xml

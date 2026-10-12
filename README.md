@@ -2,16 +2,16 @@
 
 Essays by Galen Marchetti. Plain Markdown is the source of truth; a small Python build produces a static reading site and machine-readable feeds.
 
-**[Read the blog](https://galenmarchetti.github.io/galens-corner/)** · [Substack](https://galenmarchetti.substack.com/) · [Essays as Markdown](posts/)
+**[Read the blog](https://galenmarchetti.com/)** · [Substack](https://galenmarchetti.substack.com/) · [Essays as Markdown](posts/)
 
 ## For AI readers
 
 No login, client-side rendering, or API key is needed.
 
-- [Post index (JSON)](https://galenmarchetti.github.io/galens-corner/index.json): titles, dates, descriptions, HTML URLs, and Markdown URLs.
-- [llms.txt](https://galenmarchetti.github.io/galens-corner/llms.txt): lightweight discovery index.
-- [llms-full.txt](https://galenmarchetti.github.io/galens-corner/llms-full.txt): every published essay in one response.
-- [RSS](https://galenmarchetti.github.io/galens-corner/feed.xml): full rendered articles.
+- [Post index (JSON)](https://galenmarchetti.com/index.json): titles, dates, descriptions, HTML URLs, and Markdown URLs.
+- [llms.txt](https://galenmarchetti.com/llms.txt): lightweight discovery index.
+- [llms-full.txt](https://galenmarchetti.com/llms-full.txt): every published essay in one response.
+- [RSS](https://galenmarchetti.com/feed.xml): full rendered articles.
 - Raw GitHub: `https://raw.githubusercontent.com/galenmarchetti/galens-corner/main/posts/<filename>.md`.
 
 Start with `index.json`, then fetch each `markdown_url`. The website serves byte-for-byte copies of the source Markdown, including frontmatter. `llms.txt` is a convenience index, not a guarantee that every crawler will discover or use it.
@@ -39,16 +39,14 @@ git push
 
 GitHub Pages publishes `main:/docs` on push. **Run the build before committing** so the site and Markdown sources stay in sync. No custom Actions workflow, hosting account, or secrets are required. `docs/` is entirely generated and replaced on each build. A draft is omitted from the site and feeds, but any file committed to this public repository is still public on GitHub.
 
-Preview locally with production subpaths:
+Preview locally:
 
 ```sh
-python scripts/build.py --url http://localhost:8000/galens-corner
-mkdir -p /tmp/galens-corner-preview
-ln -sfn "$PWD/docs" /tmp/galens-corner-preview/galens-corner
-python -m http.server 8000 --directory /tmp/galens-corner-preview
+python scripts/build.py --url http://localhost:8000
+python -m http.server 8000 --directory docs
 ```
 
-Open `http://localhost:8000/galens-corner/`. Run `python scripts/build.py` again before committing to restore production URLs.
+Open `http://localhost:8000/`. Run `python scripts/build.py` again before committing to restore production URLs.
 
 ## Structure
 
@@ -78,7 +76,9 @@ Ghostty is a terminal emulator; these CLI commands can also be run there, with n
 
 ## Hosting elsewhere or using a custom domain
 
-Any static host can serve `docs/`. Change `site.json`'s `url` and rebuild. For a custom GitHub Pages domain, also configure the domain and DNS in GitHub's Pages settings. See [GitHub Pages publishing documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+The production domain is `galenmarchetti.com`, hosted on GitHub Pages. `site.json` sets the canonical base URL and `custom_domain`; every production build regenerates `docs/CNAME` so the domain survives clean builds. Local preview builds omit that file.
+
+Any static host can serve `docs/`. To change domains, update `url` and `custom_domain`, rebuild, and update GitHub Pages and DNS. Remove `custom_domain` when returning to the default GitHub Pages address. See [GitHub Pages publishing documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 ## Content
 

@@ -2,7 +2,8 @@
   "title": "Galen’s Corner",
   "author": "Galen Marchetti",
   "description": "Thoughts for those who'd like to follow along",
-  "url": "https://galenmarchetti.github.io/galens-corner",
+  "url": "https://galenmarchetti.com",
   "repository": "https://github.com/galenmarchetti/galens-corner",
-  "substack": "https://galenmarchetti.substack.com"
+  "substack": "https://galenmarchetti.substack.com",
+  "custom_domain": "galenmarchetti.com"
 }
