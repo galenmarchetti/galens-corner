@@ -53,9 +53,10 @@ def build(root=ROOT, url_override=None):
     posts = read_posts(root)
     def page(title, description, content, path='', extra=''):
         url = base + '/' + path
+        page_title = title if title == config['title'] else title + ' — ' + config['title']
         return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{escape(title)} — {escape(config['title'])}</title>
+<title>{escape(page_title)}</title>
 <meta name="description" content="{escape(description, quote=True)}">
 <link rel="canonical" href="{url}"><link rel="stylesheet" href="{base}/style.css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="{base}/feed.xml">
@@ -102,7 +103,7 @@ def build(root=ROOT, url_override=None):
     write(out/'404.html',page('Page not found','This page does not exist.',f'<h1>Page not found.</h1><p><a href="{base}/">Return to the essays →</a></p>','404.html'))
     write(out/'index.json',json.dumps({'title':config['title'],'posts':index},ensure_ascii=False,indent=2)+'\n')
     write(out/'llms.txt','\n'.join(llms)+'\n')
-    write(out/'llms-full.txt','\n'.join(full)+'\n')
+    write(out/'llms-full.txt','\n'.join(full).rstrip()+'\n')
     write(out/'feed.xml',ET.tostring(rss,encoding='unicode',xml_declaration=True))
     write(out/'sitemap.xml',ET.tostring(sitemap,encoding='unicode',xml_declaration=True))
     write(out/'robots.txt',f'User-agent: *\nAllow: /\n\nSitemap: {base}/sitemap.xml\n')

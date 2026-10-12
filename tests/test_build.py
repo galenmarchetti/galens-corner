@@ -29,7 +29,7 @@ class BlogBuildTests(unittest.TestCase):
             self.assertIn('/galens-corner/essays/', entry['url'])
             html = (self.root/'docs/essays'/p['slug']/'index.html').read_text()
             self.assertIn(entry['markdown_url'], html)
-            self.assertIn('https://en.wikipedia.org/wiki/Functionalism_(philosophy_of_mind)', html)
+            self.assertIn(p['html'], html)
     def test_draft_absent_and_stale_output_removed(self):
         build(self.root)
         p = next((self.root/'posts').glob('*.md'))
