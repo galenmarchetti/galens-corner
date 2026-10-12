@@ -1,0 +1,15 @@
+# Galen’s Corner
+
+> Essays on philosophy, consciousness, and the things worth thinking about.
+
+Essays by Galen Marchetti. Full text is available without JavaScript or authentication.
+
+## Indexes
+
+- [JSON post index](https://galenmarchetti.github.io/galens-corner/index.json)
+- [All essays in Markdown](https://galenmarchetti.github.io/galens-corner/llms-full.txt)
+- [RSS feed](https://galenmarchetti.github.io/galens-corner/feed.xml)
+
+## Essays
+
+- [Sentience](https://galenmarchetti.github.io/galens-corner/posts/2026-10-03-sentience.md): On LLM torture chambers, indubitable truth, limitations of science (2026-10-03)
